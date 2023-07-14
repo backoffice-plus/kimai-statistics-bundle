@@ -89,7 +89,11 @@ final class StatisticsController extends BaseApiController
 
         $statistics = $this->getYearStatistics($dateRange, $allUsers);
 
-        $view = new View($statistics, 200);
+        $viewData = [
+            "users" => $allUsers,
+            "statistics" => $statistics,
+        ];
+        $view = new View($viewData, 200);
         $view->getContext()->setGroups(self::GROUPS_ENTITY);
 
         return $this->viewHandler->handle($view);
